@@ -15,7 +15,7 @@ class VenvThread(threading.Thread):
     def run(self) -> None:
         self.start = time.time()
         os.system(f'cd {self.path_to} && python -m venv venv')
-        self.done_time = self.start - time.time()
+        self.done_time =  time.time() - self.start
         if self.__class__.done is None:
             self.__class__.done = self.done_time
         else:
@@ -151,7 +151,6 @@ while True:
     count_threads_alive = len(alives)
     if count_threads_alive == 0:
         break
-    print(VenvThread.done)
     print("Alive threads count",
           count_threads_alive,
           f"\n\t ETA : {count_threads_alive * VenvThread.done if VenvThread.done is not None else 0:.2f} seconds")
